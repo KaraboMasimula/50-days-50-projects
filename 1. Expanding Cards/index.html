@@ -41,57 +41,66 @@
     }
 
     span {
-      display: none;
+      visibility: hidden ;
       color: white;
       margin: 15px;
       align-self: end;
     }
 
+    .display-span {
+      visibility: visible ;
+    }
+
     .card-1 {
-      background-image: url(https://images.unsplash.com/photo-1670272504528-790c24957dda?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60);
+      background-image: url(https://images.unsplash.com/photo-1678109480818-5c6f124d296f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80);
     }
     .card-2 {
-      background-image: url(https://images.unsplash.com/photo-1661956602868-6ae368943878?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60);
+      background-image: url(https://images.unsplash.com/photo-1629021637790-4ce4b8608d78?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80);
     }
     .card-3 {
-      background-image: url(https://images.unsplash.com/photo-1677962555253-0565bb18722c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60);
+      background-image: url(https://images.unsplash.com/photo-1678034845441-2c1d777a14f0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1112&q=80);
     }
     .card-4 {
-      background-image: url(https://images.unsplash.com/photo-1678047441857-15edea529311?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60);
+      background-image: url(https://images.unsplash.com/photo-1592859372969-7ce244fb6582?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80);
     }
     .card-5 {
-      background-image: url(https://images.unsplash.com/photo-1674574124349-0928f4b2bce3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60);
+      background-image: url(https://images.unsplash.com/photo-1669884100358-0950856fca7b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80);
     }
   </style>
   <body>
     <h1>Expanding cards</h1>
     <div class="card-wrapper">
-      <div id="card" class="card card-1 active">
-        <span>Chilling with friends</span>
+      <div class="card card-1 active">
+        <span class="display-span">Work hard</span>
       </div>
-      <div class="card card-2"><span>Coffe works</span></div>
-      <div class="card card-3"><span>Surfs up</span></div>
-      <div class="card card-4"><span>Icy snow</span></div>
-      <div class="card card-5"><span>Active lives</span></div>
+      <div class="card card-2"><span>Take me to china</span></div>
+      <div class="card card-3"><span>Mind block</span></div>
+      <div class="card card-4">
+        <span>Abstract cause normal is overated</span>
+      </div>
+      <div class="card card-5"><span>Night lives</span></div>
     </div>
   </body>
   <script>
-    document.getElementsByClassName("card-1")[0].firstChild.style = "display: inline";
-console.log(document.getElementsByClassName("card-1")[0].firstChild.style);
     let cards = document.querySelectorAll(".card");
 
     cards.forEach((card) => {
-      card.addEventListener("click", function () {
+      card.addEventListener("click", function (e) {
+        /* return oif clicked element is already acticve*/
+        if (e.target.classList.contains("active")) {
+          return;
+        }
         /* Remove active class from current wide card */
         let actives = document.getElementsByClassName("active");
 
-        actives[0].firstChild.style = "display: none;";
+        actives[0].firstElementChild.classList.remove("display-span");
         actives[0].classList.remove("active");
 
         /* Add active class to clicked card */
-        card.classList.add("active");
+        e.target.classList.add("active");
+        
         setTimeout(() => {
-          card.firstChild.style = "display: inline;";
+          card.firstElementChild.classList.add("display-span");
         }, 600);
       });
     });
