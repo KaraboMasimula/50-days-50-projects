@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Progress steps</title>
+    <style>
+      .steps {
+        display: flex;
+        justify-content: center;
+      }
+      .step {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        outline: 2px solid rgb(108, 101, 115);
+        transition: all .5s ease-in-out;
+      }
+
+      .active::before {
+        position: absolute;
+        content: "";
+        outline: solid blueviolet;
+        transform: translate(48px, 0);
+        width: 30px;
+        transition: all .5s ease-in-out;
+      }
+
+      .highlighted {
+        outline: solid 4px blueviolet;
+        transition: all .5s ease-in-out;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: center;
+      }
+
+      button {
+        margin: 20px;
+        padding: 10px;
+        background-color: blueviolet;
+        color: white;
+        min-width: 100px;
+        border-radius: 5px;
+        border: none;
+      }
+
+      button:hover {
+        background-color: white;
+        color: blueviolet;
+        outline: solid blueviolet 1px;
+        cursor: pointer;
+        transition: all .5s ease-in-out;
+      }
+
+      button:disabled {
+        background-color: #8a2be26b;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="steps">
+        <div class="step highlighted" id="step-1" data-index="1">1</div>
+        <div class="step" id="step-2" data-index="2">2</div>
+        <div class="step" id="step-3" data-index="3">3</div>
+        <div class="step" id="step-4" data-index="4">4</div>
+      </div>
+      <div class="buttons">
+        <button id="prev">Prev</button>
+        <button id="next">Next</button>
+      </div>
+    </div>
+  </body>
+  <script>
+    let index = 0;
+    let nextBtn = document.getElementById("next");
+    let prevBtn = document.getElementById("prev");
+
+    prevBtn.disabled = true;
+
+    let max = document.getElementsByClassName("steps")[0].children.length - 1;
+    
+    nextBtn.addEventListener("click", function (e) {
+      index++;
+      if (index > max) {
+        index--;
+        e.target.disabled = true;
+        return;
+      }
+
+      let currentStep = document.getElementById("step-" + index);
+      currentStep.classList.add(...["active", "highlighted"]);
+
+      let nextStep = document.getElementById("step-" + (index + 1));
+      nextStep.classList.add(...["highlighted"]);
+
+      if (index == max) e.target.disabled = true;
+
+      prevBtn.disabled = false;
+    });
+
+    prevBtn.addEventListener("click", function (e) {
+      if (index == 0) {
+        e.target.disabled = true;
+        return;
+      }
+      let currentStep = document.getElementById("step-" + index);
+      currentStep.classList.remove(...["active"]);
+
+      let prevStep = document.getElementById("step-" + (index + 1));
+      prevStep.classList.remove(...["highlighted"]);
+
+      index--;
+
+      if (index <= 0) {
+        e.target.disabled = true;
+      }
+
+      nextBtn.disabled = false;
+      //console.log(index);
+    });
+  </script>
+</html>
