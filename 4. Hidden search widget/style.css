@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: rgb(175, 117, 229);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+.input-container {
+  overflow: hidden;
+}
+
+.input-container input {
+  overflow: hidden;
+  background-color: transparent;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-bottom: solid rgb(201, 176, 222);
+  transition: all 0.5s ease;
+  transform-origin: right;
+}
+
+.input-container input::placeholder {
+  color: rgb(201, 176, 222);
+}
+
+.input-container input:focus {
+  outline: none;
+  border-bottom: solid rgb(255, 255, 255);
+}
+
+.input-container button {
+  width: auto;
+  padding: 5px;
+  font-size: 20px;
+  background-color: #fff;
+  color: #7c7c7c;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  transition: transform 0.5s ease;
+}
+
+.input-container button:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #7c7c7c;
+}
+
+.squished {
+  /*   transform: scalex(0);
+  transform-origin: right;
+  display: none;
+ */
+
+  border: none;
+  animation: squish 0.5s ease forwards;
+}
+
+.full {
+  /* width: 200px; */
+  animation: unsquish 0.5s ease forwards;
+}
+
+@keyframes squish {
+  from {
+    width: 200px;
+  }
+  to {
+    width: 0px;
+    border-bottom: none;
+  }
+}
+
+@keyframes unsquish {
+  from {
+    width: 0px;
+  }
+  to {
+    width: 200px;
+    border-bottom: solid rgb(201, 176, 222);
+  }
+}
